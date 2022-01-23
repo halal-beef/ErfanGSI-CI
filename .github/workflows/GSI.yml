@@ -25,6 +25,6 @@ jobs:
         if: always()
         uses: softprops/action-gh-release@v1
         with:
-          files: /home/runner/ErfanGSI-CI/ErfanGSIs/output/*.img
+          files: /home/runner/work/ErfanGSI-CI/ErfanGSI-CI/ErfanGSIs/output/*.img
           tag_name: ${{ github.run_id }}
           body: ${{ github.event.inputs.ROM_TYPE }} GSI - Ported on $(date +"%d-%m-%y")
