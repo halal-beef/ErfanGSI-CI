@@ -13,6 +13,7 @@ on:
 jobs:
   Port:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v2
       - name: Free Up Space & Set ENV Values
