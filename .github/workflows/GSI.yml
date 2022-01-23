@@ -32,10 +32,9 @@ jobs:
       - name: Start Porting
         run: cd ErfanGSIs && sudo ./url2GSI.sh "${{ github.event.inputs.ROM_LINK }}" "${{ github.event.inputs.ROM_TYPE }}"
 
-      - name: Upload Release
+      - name: Upload
         if: always()
-        uses: softprops/action-gh-release@v1
+        uses: actions/upload-artifact@v2.3.1
         with:
-          files: /home/runner/work/ErfanGSI-CI/ErfanGSI-CI/ErfanGSIs/output/*.img
-          tag_name: ${{ github.run_id }}
-          body: ${{ github.event.inputs.ROM_TYPE }} GSI - Ported on ${{ steps.date.outputs.today }}
+          name: GSI.zip
+          path: /home/runner/work/ErfanGSI-CI/ErfanGSI-CI/ErfanGSIs/output/*.img
