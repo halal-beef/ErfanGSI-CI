@@ -1,30 +1,29 @@
-name: Make OEM-GSI
+name: OEM-GSI CI
 
 on:
   workflow_dispatch:
     inputs:
       ROM_LINK:
-        description: 'Rom link'
+        description: 'URL to ROM OTA Update ZIP'
         required: true
         default: 'https://oxygenos.oneplus.net/OnePlus7ProOxygen_21.O.07_OTA_007_all_1905120542_fc480574576b4843.zip'
       ROM_TYPE:
-         description: 'Rom Type'
+         description: 'ROM Name'
          default: 'OxygenOS'
 jobs:
   Port:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-      - name: Clone ErfanGSI Tools And Setup
+      - name: Install ErfanGSI
         run: git clone --recurse-submodules https://github.com/erfanoabdi/ErfanGSIs.git && cd ErfanGSIs && bash setup.sh
+
       - name: Start Porting
         run: cd ErfanGSIs && sudo ./url2GSI.sh "${{ github.event.inputs.ROM_LINK }}" "${{ github.event.inputs.ROM_TYPE }}"
-      - name: Upload to Release
+
+      - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           files: /home/runner/ErfanGSI-CI/ErfanGSIs/output/*.img
           tag_name: ${{ github.run_id }}
-          body: ${{ github.event.inputs.ROM_TYPE }} GSI - Ported On $(date +"%d-%m-%y")
-
-        
+          body: ${{ github.event.inputs.ROM_TYPE }} GSI - Ported on $(date +"%d-%m-%y")
