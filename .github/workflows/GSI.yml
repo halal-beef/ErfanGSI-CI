@@ -27,4 +27,4 @@ jobs:
         with:
           files: /home/runner/work/ErfanGSI-CI/ErfanGSI-CI/ErfanGSIs/output/*.img
           tag_name: ${{ github.run_id }}
-          body: ${{ github.event.inputs.ROM_TYPE }} GSI - Ported on $(date +"%d-%m-%y")
+          body: ${{ github.event.inputs.ROM_TYPE }} GSI - Ported on { $(date +"%d-%m-%y") }
