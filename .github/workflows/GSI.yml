@@ -19,7 +19,7 @@ jobs:
       - name: Clone ErfanGSI Tools And Setup
         run: git clone --recurse-submodules https://github.com/erfanoabdi/ErfanGSIs.git && cd ErfanGSIs && bash setup.sh
       - name: Start Porting
-        run: sudo ./url2GSI.sh "${{ github.event.inputs.ROM_LINK }}" "${{ github.event.inputs.ROM_TYPE }}"
+        run: cd ErfanGSIs && sudo ./url2GSI.sh "${{ github.event.inputs.ROM_LINK }}" "${{ github.event.inputs.ROM_TYPE }}"
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         with:
