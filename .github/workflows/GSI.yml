@@ -13,7 +13,6 @@ on:
 jobs:
   Port:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v2
       - name: Install ErfanGSI
@@ -23,6 +22,7 @@ jobs:
         run: cd ErfanGSIs && sudo ./url2GSI.sh "${{ github.event.inputs.ROM_LINK }}" "${{ github.event.inputs.ROM_TYPE }}"
 
       - name: Upload Release
+        if: always()
         uses: softprops/action-gh-release@v1
         with:
           files: /home/runner/ErfanGSI-CI/ErfanGSIs/output/*.img
